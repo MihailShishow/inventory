@@ -1,7 +1,7 @@
 from .models import Product, ProductCategory, Counterparty, IncomeWarrant, OutcomeWarrant, IncomeInvoice, OutcomeInvoice, ProductIncome, ProductOutcome
 from rest_framework import serializers
 
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
@@ -9,26 +9,26 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-class CounterpartySerializer(serializers.HyperlinkedModelSerializer):
+class CounterpartySerializer(serializers.ModelSerializer):
     class Meta:
         model = Counterparty
         fields = '__all__'
         read_only_fields = ['saldo',]
 
 
-class IncomeWarrantSerializer(serializers.HyperlinkedModelSerializer):
+class IncomeWarrantSerializer(serializers.ModelSerializer):
     class Meta:
         model = IncomeWarrant
         fields = '__all__'
 
 
-class OutcomeWarrantSerializer(serializers.HyperlinkedModelSerializer):
+class OutcomeWarrantSerializer(serializers.ModelSerializer):
     class Meta:
         model = OutcomeWarrant
         fields = '__all__'
 
 
-class ProductCategorySerializer(serializers.HyperlinkedModelSerializer):
+class ProductCategorySerializer(serializers.ModelSerializer):
 
     products = ProductSerializer(many=True, read_only=True)
 
@@ -38,7 +38,7 @@ class ProductCategorySerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
-class ProductIncomeSerializer(serializers.HyperlinkedModelSerializer):
+class ProductIncomeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductIncome
@@ -46,7 +46,7 @@ class ProductIncomeSerializer(serializers.HyperlinkedModelSerializer):
         read_only_fields = ['total',]
 
 
-class ProductOutcomeSerializer(serializers.HyperlinkedModelSerializer):
+class ProductOutcomeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductOutcome
@@ -55,7 +55,7 @@ class ProductOutcomeSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-class IncomeInvoiceSerializer(serializers.HyperlinkedModelSerializer):
+class IncomeInvoiceSerializer(serializers.ModelSerializer):
     
     items = ProductIncomeSerializer(many=True, read_only=True)
 
@@ -65,7 +65,7 @@ class IncomeInvoiceSerializer(serializers.HyperlinkedModelSerializer):
         read_only_fields = ['total',]
 
 
-class OutcomeInvoiceSerializer(serializers.HyperlinkedModelSerializer):
+class OutcomeInvoiceSerializer(serializers.ModelSerializer):
 
     items = ProductOutcomeSerializer(many=True, read_only=True)
     
