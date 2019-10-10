@@ -1,19 +1,19 @@
 from .models import Product, ProductCategory, Counterparty, IncomeWarrant, OutcomeWarrant, IncomeInvoice, OutcomeInvoice, ProductIncome, ProductOutcome
 from rest_framework import serializers
 
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
-        read_only_fields = ['in_stock',]
-
+        read_only_fields = ['in_stock', ]
 
 
 class CounterpartySerializer(serializers.ModelSerializer):
     class Meta:
         model = Counterparty
         fields = '__all__'
-        read_only_fields = ['saldo',]
+        read_only_fields = ['saldo', ]
 
 
 class IncomeWarrantSerializer(serializers.ModelSerializer):
@@ -32,7 +32,6 @@ class ProductCategorySerializer(serializers.ModelSerializer):
 
     products = ProductSerializer(many=True, read_only=True)
 
-
     class Meta:
         model = ProductCategory
         fields = '__all__'
@@ -43,7 +42,7 @@ class ProductIncomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductIncome
         fields = '__all__'
-        read_only_fields = ['total',]
+        read_only_fields = ['total', ]
 
 
 class ProductOutcomeSerializer(serializers.ModelSerializer):
@@ -51,29 +50,27 @@ class ProductOutcomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductOutcome
         fields = '__all__'
-        read_only_fields = ['total',]
-
+        read_only_fields = ['total', ]
 
 
 class IncomeInvoiceSerializer(serializers.ModelSerializer):
-    
+
     items = ProductIncomeSerializer(many=True, read_only=True)
 
     class Meta:
         model = IncomeInvoice
         fields = '__all__'
-        read_only_fields = ['total',]
+        read_only_fields = ['total', ]
 
 
 class OutcomeInvoiceSerializer(serializers.ModelSerializer):
 
     items = ProductOutcomeSerializer(many=True, read_only=True)
-    
 
     class Meta:
         model = OutcomeInvoice
         fields = '__all__'
-        read_only_fields = ['total',]
+        read_only_fields = ['total', ]
 
 
 # PRODUCT CIRCULATION REPORT SERIAlIZERS
@@ -86,9 +83,8 @@ class CounterpartyReportSerializer(serializers.ModelSerializer):
         read_only_fields = ['__all__']
 
 
-
 class IncomeInvoiceReportSerializer(serializers.ModelSerializer):
-    
+
     received_from = CounterpartyReportSerializer(read_only=True)
 
     class Meta:
@@ -98,7 +94,7 @@ class IncomeInvoiceReportSerializer(serializers.ModelSerializer):
 
 
 class OutcomeInvoiceReportSerializer(serializers.ModelSerializer):
-    
+
     received_from = CounterpartyReportSerializer(read_only=True)
 
     class Meta:
@@ -110,7 +106,8 @@ class OutcomeInvoiceReportSerializer(serializers.ModelSerializer):
 class ProductFilteredListSerializer(serializers.ListSerializer):
 
     def to_representation(self, data):
-        data = data.filter(invoice__registered=True, invoice__issued_date__range=(self.context['start_date'], self.context['end_date']))
+        data = data.filter(invoice__registered=True, invoice__issued_date__range=(
+            self.context['start_date'], self.context['end_date']))
         return super().to_representation(data)
 
 
@@ -152,16 +149,17 @@ class ProductReportSerializer(serializers.ModelSerializer):
 class DocumentFilteredListSerializer(serializers.ListSerializer):
 
     def to_representation(self, data):
-        data = data.filter(registered=True, issued_date__range=(self.context['start_date'], self.context['end_date']))
+        data = data.filter(registered=True, issued_date__range=(
+            self.context['start_date'], self.context['end_date']))
         return super().to_representation(data)
-
 
 
 class IncomeWarrantReportSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = IncomeWarrant
-        fields = ['name', 'issued_date', 'cash_amount', 'comment', 'registered']
+        fields = ['name', 'issued_date',
+                  'cash_amount', 'comment', 'registered']
         read_only_fields = ['__all__']
         list_serializer_class = DocumentFilteredListSerializer
 
@@ -170,7 +168,8 @@ class OutcomeWarrantReportSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OutcomeWarrant
-        fields = ['name', 'issued_date', 'cash_amount', 'comment', 'registered']
+        fields = ['name', 'issued_date',
+                  'cash_amount', 'comment', 'registered']
         read_only_fields = ['__all__']
         list_serializer_class = DocumentFilteredListSerializer
 
@@ -193,19 +192,15 @@ class OutcomeInvoiceReportSerializer(serializers.ModelSerializer):
         list_serializer_class = DocumentFilteredListSerializer
 
 
-
 class CounterpartyReportSerializer(serializers.ModelSerializer):
 
     cash_incomes = IncomeWarrantReportSerializer(many=True, read_only=True)
     cash_outcomes = OutcomeWarrantReportSerializer(many=True, read_only=True)
     invoices_income = IncomeInvoiceReportSerializer(many=True, read_only=True)
-    invoices_outcome = OutcomeInvoiceReportSerializer(many=True, read_only=True)
-    
+    invoices_outcome = OutcomeInvoiceReportSerializer(
+        many=True, read_only=True)
 
     class Meta:
         model = Counterparty
         fields = '__all__'
         read_only_fields = ['__all__']
-
-
-

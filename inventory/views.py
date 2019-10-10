@@ -12,6 +12,7 @@ from django.db.models import ProtectedError
 from rest_framework.generics import get_object_or_404
 # Create your views here.
 
+
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by('name')
     serializer_class = ProductSerializer
@@ -20,12 +21,11 @@ class ProductViewSet(viewsets.ModelViewSet):
         try:
             product = self.get_object()
             self.perform_destroy(product)
-            return Response(status=status.HTTP_204_NO_CONTENT)  
+            return Response(status=status.HTTP_204_NO_CONTENT)
         except Http404:
             return Response(status=status.HTTP_404_NOT_FOUND)
         except ProtectedError:
             return Response(status=status.HTTP_403_FORBIDDEN)
-        
 
 
 class CounterpartyViewSet(viewsets.ModelViewSet):
@@ -57,7 +57,7 @@ class IncomeWarrantViewSet(viewsets.ModelViewSet):
                 return Response(status=status.HTTP_403_FORBIDDEN)
         except Http404:
             return Response(status=status.HTTP_404_NOT_FOUND)
-    
+
 
 class OutcomeWarrantViewSet(viewsets.ModelViewSet):
     queryset = OutcomeWarrant.objects.all().order_by('issued_date')
@@ -153,7 +153,8 @@ class ProductCirculationByDateRange(APIView):
         if start_date > end_date:
             return Response(data={'error': 'Wrong order of dates.'}, status=400)
         else:
-            context = {'request': request, 'start_date': start_date, 'end_date': end_date}
+            context = {'request': request,
+                       'start_date': start_date, 'end_date': end_date}
             product = get_object_or_404(Product.objects.all(), pk=pk)
             serializer = ProductReportSerializer(product, context=context)
             return Response({'data': serializer.data})
@@ -168,7 +169,9 @@ class CounterpartySummaryByDateRange(APIView):
         if start_date > end_date:
             return Response(data={'error': 'Wrong order of dates.'}, status=400)
         else:
-            context = {'request': request, 'start_date': start_date, 'end_date': end_date}
+            context = {'request': request,
+                       'start_date': start_date, 'end_date': end_date}
             counterparty = get_object_or_404(Counterparty.objects.all(), pk=pk)
-            serializer = CounterpartyReportSerializer(counterparty, context=context)
+            serializer = CounterpartyReportSerializer(
+                counterparty, context=context)
             return Response({'data': serializer.data})

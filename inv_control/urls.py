@@ -31,13 +31,13 @@ router.register(r'productoutcomes', views.ProductOutcomeViewSet)
 router.register(r'productincomes', views.ProductIncomeViewSet)
 
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls'), name='rest_framework'),
-    re_path(r'products/(?P<pk>\d+)/circulation/(?P<start>\d{4}-\d{2}-\d{2})/(?P<end>\d{4}-\d{2}-\d{2})/', views.ProductCirculationByDateRange.as_view()),
+    re_path(
+        r'products/(?P<pk>\d+)/circulation/(?P<start>\d{4}-\d{2}-\d{2})/(?P<end>\d{4}-\d{2}-\d{2})/', views.ProductCirculationByDateRange.as_view()),
     # re_path(r'products/circulation/(?P<start>\d{4}-\d{2}-\d{2})/(?P<end>\d{4}-\d{2}-\d{2})/', views.products_circulation_by_date_range),
-    re_path(r'counterparties/(?P<pk>\d+)/summary/(?P<start>\d{4}-\d{2}-\d{2})/(?P<end>\d{4}-\d{2}-\d{2})/', views.CounterpartySummaryByDateRange.as_view()),
+    re_path(
+        r'counterparties/(?P<pk>\d+)/summary/(?P<start>\d{4}-\d{2}-\d{2})/(?P<end>\d{4}-\d{2}-\d{2})/', views.CounterpartySummaryByDateRange.as_view()),
 ]
