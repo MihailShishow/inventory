@@ -1,4 +1,6 @@
-from .models import Product, ProductCategory, Counterparty, IncomeWarrant, OutcomeWarrant, IncomeInvoice, OutcomeInvoice, ProductIncome, ProductOutcome
+from .models import Product, ProductCategory, Counterparty, IncomeWarrant,\
+    OutcomeWarrant, IncomeInvoice, OutcomeInvoice,\
+    ProductIncome, ProductOutcome
 from rest_framework import serializers
 
 
@@ -106,8 +108,10 @@ class OutcomeInvoiceReportSerializer(serializers.ModelSerializer):
 class ProductFilteredListSerializer(serializers.ListSerializer):
 
     def to_representation(self, data):
-        data = data.filter(invoice__registered=True, invoice__issued_date__range=(
-            self.context['start_date'], self.context['end_date']))
+        data = data.filter(invoice__registered=True,
+                           invoice__issued_date__range=(
+                               self.context['start_date'],
+                               self.context['end_date']))
         return super().to_representation(data)
 
 

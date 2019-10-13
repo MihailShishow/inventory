@@ -29,7 +29,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=20, decimal_places=2)
     in_stock = models.DecimalField(max_digits=20, decimal_places=2, default=0)
     category = models.ForeignKey(
-        ProductCategory, on_delete=models.SET_NULL, blank=True, null=True, related_name='products')
+        ProductCategory, on_delete=models.SET_NULL,
+        blank=True, null=True, related_name='products')
 
     class Meta:
         verbose_name = 'Товар'
@@ -167,7 +168,8 @@ class OutcomeInvoice(models.Model):
     name = models.CharField(max_length=20)
     issued_date = models.DateField(default=timezone.now)
     given_to = models.ForeignKey(
-        Counterparty, on_delete=models.PROTECT, related_name='invoices_outcome')
+        Counterparty, on_delete=models.PROTECT,
+        related_name='invoices_outcome')
     total = models.DecimalField(max_digits=20, decimal_places=2, default=0)
     registered = models.BooleanField(default=False)
 

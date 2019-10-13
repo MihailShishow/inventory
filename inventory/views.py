@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Product, ProductCategory, Counterparty, IncomeWarrant, OutcomeWarrant, IncomeInvoice, OutcomeInvoice
+from .models import Product, ProductCategory, Counterparty,\
+    IncomeWarrant, OutcomeWarrant, IncomeInvoice, OutcomeInvoice
 from rest_framework import viewsets, status
 from .serializers import *
 from rest_framework.decorators import api_view, APIView
@@ -151,7 +152,8 @@ class ProductCirculationByDateRange(APIView):
         end_date = str_to_date(end)
 
         if start_date > end_date:
-            return Response(data={'error': 'Wrong order of dates.'}, status=400)
+            return Response(data={'error': 'Wrong order of dates.'},
+                            status=400)
         else:
             context = {'request': request,
                        'start_date': start_date, 'end_date': end_date}
@@ -167,7 +169,8 @@ class CounterpartySummaryByDateRange(APIView):
         end_date = str_to_date(end)
 
         if start_date > end_date:
-            return Response(data={'error': 'Wrong order of dates.'}, status=400)
+            return Response(data={'error': 'Wrong order of dates.'},
+                            status=400)
         else:
             context = {'request': request,
                        'start_date': start_date, 'end_date': end_date}
@@ -175,3 +178,4 @@ class CounterpartySummaryByDateRange(APIView):
             serializer = CounterpartyReportSerializer(
                 counterparty, context=context)
             return Response({'data': serializer.data})
+
