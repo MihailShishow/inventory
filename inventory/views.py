@@ -178,4 +178,3 @@ class CounterpartySummaryByDateRange(APIView):
             serializer = CounterpartyReportSerializer(
                 counterparty, context=context)
             return Response({'data': serializer.data})
-
