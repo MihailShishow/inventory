@@ -1,59 +1,47 @@
 <html>
+
 <head>
-<title>Testing REST API</title>
+    <title>Testing REST API</title>
 
 
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+    function writeln(text) {
+        $(".terminal").append("<p>" + text + "</p>");
+    }
 
-function writeln(text) {
-$(".terminal").append("<p>" + text + "</p>");
-}
-
-function postProduct() {
-
-product = {
-name: "Sausage",
-measure_unit: "kg",
-price: 10.50,
-};
-
-settings = {
-
-url: "https://rocky-crag-71592.herokuapp.com/api/products/",
-method: "POST",
-beforeSend: function(request){
-    request.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
-},
-data: product,
-timeout: 0,
-success: function(data) {
-writeln("Success");
-},
-error: function(data) {
-writeln("Error");
-},
-};
-
-
-
-$.ajax(settings);
-
-
-
-}
-
-
-
-
+    function postProduct() {
+        product = {
+            name: "Sausage",
+            measure_unit: "kg",
+            price: 10.50,
+        };
+        settings = {
+            url: "https://rocky-crag-71592.herokuapp.com/api/products/",
+            method: "POST",
+            beforeSend: function(request) {
+                request.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            },
+            data: product,
+            timeout: 0,
+            success: function(data) {
+                writeln("Success");
+            },
+            error: function(data) {
+                writeln("Error");
+            },
+        };
+        $.ajax(settings);
+    }
 </script>
+
 <body>
-<button type="button" onclick="postProduct()">Start</button>
+    <button type="button" onclick="postProduct()">Start</button>
 
-<div class="terminal" style="font-family: monospace;">
+    <div class="terminal" style="font-family: monospace;">
 
-</div>
+    </div>
 
 
 
