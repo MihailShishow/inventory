@@ -17,13 +17,15 @@ product = {
 name: "Sausage",
 measure_unit: "kg",
 price: 10.50,
-csrfmiddlewaretoken: "{{ csrf_token }}",
 };
 
 settings = {
 
 url: "https://rocky-crag-71592.herokuapp.com/api/products/",
 method: "POST",
+beforeSend: function(request){
+    request.setRequestHeader("X-CSRFToken", "{{ csrf_token }});
+},
 data: product,
 timeout: 0,
 success: function(data) {
