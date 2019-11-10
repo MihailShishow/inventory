@@ -4,7 +4,7 @@
     <title>Testing REST API</title>
 </head>
 <script>
-    function getProducts() {
+    async function getProducts() {
         let response = await fetch("https://rocky-crag-71592.herokuapp.com/api/products/");
         if (response.ok) {
             let json = response.json();
@@ -18,6 +18,6 @@
 
 <body>
     <a href="/api/">API</a>
-    <button onclick="getProducts()"></button> </body>
+    <button onclick=getProducts()></button> </body>
 
 </html>
