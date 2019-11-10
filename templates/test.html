@@ -7,8 +7,8 @@
     async function getProducts() {
         let response = await fetch("https://rocky-crag-71592.herokuapp.com/api/products/");
         if (response.ok) {
-            let json = response.json();
-            alert(json)
+            let text = response.text();
+            alert(text)
         } else {
             alert("ERROR " + response.status);
         }
