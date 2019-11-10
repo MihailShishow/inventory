@@ -24,6 +24,9 @@ class Counterparty(models.Model):
 
 
 class Product(models.Model):
+    '''
+    Product docstring
+    '''
     name = models.CharField(max_length=200)
     measure_unit = models.CharField(max_length=5)
     price = models.DecimalField(max_digits=20, decimal_places=2)
