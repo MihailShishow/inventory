@@ -8,9 +8,9 @@
         let response = await fetch("https://rocky-crag-71592.herokuapp.com/api/products/");
         if (response.ok) {
             let text = response.text();
-            alert(text)
+            console.log(text);
         } else {
-            alert("ERROR " + response.status);
+            console.log("ERROR " + response.status);
         }
     }
 </script>
