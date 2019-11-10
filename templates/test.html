@@ -3,11 +3,21 @@
 <head>
     <title>Testing REST API</title>
 </head>
+<script>
+    function getProducts() {
+        let response = await fetch("https://rocky-crag-71592.herokuapp.com/api/products/");
+        if (response.ok) {
+            let json = response.json();
+            alert(json)
+        } else {
+            alert("ERROR " + response.status);
+        }
+    }
+</script>
 
 
 <body>
-<a href="/api/">API</a>
-
-</body>
+    <a href="/api/">API</a>
+    <button onclick="getProducts()"></button> </body>
 
 </html>

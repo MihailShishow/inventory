@@ -40,5 +40,5 @@ urlpatterns = [
         r'api/products/(?P<pk>\d+)/circulation/(?P<start>\d{4}-\d{2}-\d{2})/(?P<end>\d{4}-\d{2}-\d{2})/', views.ProductCirculationByDateRange.as_view()),
     re_path(
         r'api/counterparties/(?P<pk>\d+)/summary/(?P<start>\d{4}-\d{2}-\d{2})/(?P<end>\d{4}-\d{2}-\d{2})/', views.CounterpartySummaryByDateRange.as_view()),
-    path('/', front_views.TestTemplateView.as_view()),
+    path('', front_views.TestTemplateView.as_view()),
 ]
