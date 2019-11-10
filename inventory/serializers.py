@@ -5,6 +5,9 @@ from rest_framework import serializers
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    '''
+    Product docstring
+    '''
     class Meta:
         model = Product
         fields = '__all__'
