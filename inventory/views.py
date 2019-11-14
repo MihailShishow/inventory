@@ -15,6 +15,9 @@ from rest_framework.generics import get_object_or_404
 
 
 class ProductViewSet(viewsets.ModelViewSet):
+    '''
+    Product docstring
+    '''
     queryset = Product.objects.all().order_by('name')
     serializer_class = ProductSerializer
 
