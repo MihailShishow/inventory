@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'inventory',
     'rest_framework',
     'frontend',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
