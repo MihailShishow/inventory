@@ -59,6 +59,23 @@ class IncomeWarrantViewSet(viewsets.ModelViewSet):
         except Http404:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+    def update(self, request, *args, **kwargs):
+        try:
+            saved_warrant = self.get_object()
+            if not saved_warrant.registered:
+                data = request.data
+                serializer = IncomeWarrantSerializer(
+                    saved_warrant, data, partial=True)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                else:
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+        except Http404:
+            return Response(status.HTTP_404_NOT_FOUND)
+
 
 class OutcomeWarrantViewSet(viewsets.ModelViewSet):
     queryset = OutcomeWarrant.objects.all().order_by('issued_date')
@@ -74,6 +91,23 @@ class OutcomeWarrantViewSet(viewsets.ModelViewSet):
                 return Response(status=status.HTTP_403_FORBIDDEN)
         except Http404:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def update(self, request, *args, **kwargs):
+        try:
+            saved_warrant = self.get_object()
+            if not saved_warrant.registered:
+                data = request.data
+                serializer = OutcomeWarrantSerializer(
+                    saved_warrant, data, partial=True)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                else:
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+        except Http404:
+            return Response(status.HTTP_404_NOT_FOUND)
 
 
 class ProductCategoryViewSet(viewsets.ModelViewSet):
@@ -96,6 +130,23 @@ class IncomeInvoiceViewSet(viewsets.ModelViewSet):
         except Http404:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+    def update(self, request, *args, **kwargs):
+        try:
+            saved_invoice = self.get_object()
+            if not saved_invoice.registered:
+                data = request.data
+                serializer = IncomeInvoiceSerializer(
+                    saved_invoice, data, partial=True)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                else:
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+        except Http404:
+            return Response(status.HTTP_404_NOT_FOUND)
+
 
 class OutcomeInvoiceViewSet(viewsets.ModelViewSet):
     queryset = OutcomeInvoice.objects.all().order_by('issued_date')
@@ -111,6 +162,23 @@ class OutcomeInvoiceViewSet(viewsets.ModelViewSet):
                 return Response(status=status.HTTP_403_FORBIDDEN)
         except Http404:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def update(self, request, *args, **kwargs):
+        try:
+            saved_invoice = self.get_object()
+            if not saved_invoice.registered:
+                data = request.data
+                serializer = OutcomeInvoiceSerializer(
+                    saved_invoice, data, partial=True)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                else:
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+        except Http404:
+            return Response(status.HTTP_404_NOT_FOUND)
 
 
 class ProductIncomeViewSet(viewsets.ModelViewSet):
@@ -128,6 +196,23 @@ class ProductIncomeViewSet(viewsets.ModelViewSet):
         except Http404:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+    def update(self, request, *args, **kwargs):
+        try:
+            saved_income = self.get_object()
+            if not saved_income.invoice.registered:
+                data = request.data
+                serializer = ProductIncomeSerializer(
+                    saved_income, data, partial=True)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                else:
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+        except Http404:
+            return Response(status.HTTP_404_NOT_FOUND)
+
 
 class ProductOutcomeViewSet(viewsets.ModelViewSet):
     queryset = ProductOutcome.objects.all()
@@ -143,6 +228,23 @@ class ProductOutcomeViewSet(viewsets.ModelViewSet):
                 return Response(status=status.HTTP_403_FORBIDDEN)
         except Http404:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def update(self, request, *args, **kwargs):
+        try:
+            saved_outcome = self.get_object()
+            if not saved_outcome.invoice.registered:
+                data = request.data
+                serializer = ProductOutcomeSerializer(
+                    saved_outcome, data, partial=True)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                else:
+                    return Response(status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+        except Http404:
+            return Response(status.HTTP_404_NOT_FOUND)
 
 
 class ProductCirculationByDateRange(APIView):
