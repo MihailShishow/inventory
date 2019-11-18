@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css">
 </head>
 
+<style>
+    .content {
+        margin: auto;
+        padding: 10px;
+    }
+</style>
+
 <body>
 
 
@@ -36,7 +43,10 @@
         </div>
     </nav>
 
-    {% block content %} {% endblock content %}
+    <div class="content">
+
+        {% block content %} {% endblock content %}
+    </div>
 
 </body>
 
