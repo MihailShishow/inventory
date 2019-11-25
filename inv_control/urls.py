@@ -57,5 +57,13 @@ urlpatterns = [
     re_path(
         r'api/counterparties/(?P<pk>\d+)/summary/(?P<start>\d{4}-\d{2}-\d{2})/(?P<end>\d{4}-\d{2}-\d{2})/', views.CounterpartySummaryByDateRange.as_view()),
     re_path(r'^redoc/$', schema_view.with_ui('redoc',
-                                             cache_timeout=0), name='schema-redoc')
+                                             cache_timeout=0), name='schema-redoc'),
+    re_path(r'api/incomewarrants/(?P<pk>\d+)/toggle/',
+            views.IncomeWarrantToggle.as_view()),
+    re_path(r'api/outcomewarrants/(?P<pk>\d+)/toggle/',
+            views.OutcomeWarrantToggle.as_view()),
+    re_path(r'api/incomeinvoices/(?P<pk>\d+)/toggle/',
+            views.IncomeInvoiceToggle.as_view()),
+    re_path(r'api/incomeinvoices/(?P<pk>\d+)/toggle/',
+            views.IncomeInvoiceToggle.as_view()),
 ]

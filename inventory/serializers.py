@@ -22,12 +22,14 @@ class IncomeWarrantSerializer(serializers.ModelSerializer):
     class Meta:
         model = IncomeWarrant
         fields = '__all__'
+        read_only_fields = ['registered', ]
 
 
 class OutcomeWarrantSerializer(serializers.ModelSerializer):
     class Meta:
         model = OutcomeWarrant
         fields = '__all__'
+        read_only_fields = ['registered', ]
 
 
 class ProductCategorySerializer(serializers.ModelSerializer):
@@ -44,7 +46,7 @@ class ProductIncomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductIncome
         fields = '__all__'
-        read_only_fields = ['total', ]
+        read_only_fields = ['total', 'registered', ]
 
 
 class ProductOutcomeSerializer(serializers.ModelSerializer):
@@ -52,7 +54,7 @@ class ProductOutcomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductOutcome
         fields = '__all__'
-        read_only_fields = ['total', ]
+        read_only_fields = ['total', 'registered', ]
 
 
 class IncomeInvoiceSerializer(serializers.ModelSerializer):
