@@ -40,7 +40,7 @@ schema_view = get_schema_view(
         default_version='v1',
         description='API для ведения складского и кассового учета.',
         contact=openapi.Contact(email="fanoffm@gmail.com"),
-        license=openapi.License(name="GNU General Public License"),
+        license=openapi.License(name="WTFPL"),
 
     ),
     public=True,
@@ -66,4 +66,5 @@ urlpatterns = [
             views.IncomeInvoiceToggle.as_view()),
     re_path(r'api/incomeinvoices/(?P<pk>\d+)/toggle/',
             views.IncomeInvoiceToggle.as_view()),
+    path('about/', front_views.AboutTemplateView.as_view(), name='about'),
 ]

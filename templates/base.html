@@ -36,7 +36,7 @@
             <div class="collapsible-body">
                 <ul class="inline">
                     <li><a href="{% url 'schema-redoc' %}">Документация (Redoc)</a></li>
-                    <li><a href="#">О проекте</a></li>
+                    <li><a href="{% url 'about' %}">О проекте</a></li>
                     <li><a href="#">GitHub</a></li>
                 </ul>
             </div>
@@ -47,6 +47,11 @@
 
         {% block content %} {% endblock content %}
     </div>
+
+    <hr>
+    <footer>
+        <a href="http://www.wtfpl.net/"><img src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png" width="80" height="15" alt="WTFPL" /></a>
+    </footer>
 
 
 </body>
